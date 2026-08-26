@@ -85,7 +85,7 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
         <button
           type="button"
           aria-label="Volver a los detalles del vuelo"
-          className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-full bg-white text-ink transition-transform duration-150 ease-soft active:scale-95"
+          className="toque-44 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full bg-white text-ink transition-transform duration-150 ease-soft active:scale-95"
         >
           <IconoChevron className="size-4" />
         </button>

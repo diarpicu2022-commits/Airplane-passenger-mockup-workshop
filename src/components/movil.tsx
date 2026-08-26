@@ -14,12 +14,12 @@ import { BotonReservar } from "@/components/BotonReservar";
 export function BarraDeEstadoSimulada() {
   return (
     <div
-      className="flex h-14 shrink-0 items-center justify-between px-6 lg:hidden"
+      className="flex h-12 shrink-0 items-center justify-between px-6 lg:hidden"
       aria-hidden="true"
     >
-      <span className="text-[17px] font-medium text-ink tabular-nums">9:41</span>
+      <span className="text-[16px] font-medium text-ink tabular-nums">9:41</span>
 
-      <span className="h-9 w-[125px] rounded-full bg-island" />
+      <span className="h-8 w-[118px] rounded-full bg-island" />
 
       <span className="flex items-center gap-[3px]">
         {[0, 1, 2].map((i) => (
@@ -37,13 +37,13 @@ interface PropsCabecera {
 
 export function CabeceraMovil({ elegidos, maximo }: PropsCabecera) {
   return (
-    <header className="flex shrink-0 items-center justify-between px-5 py-2 lg:hidden">
+    <header className="flex shrink-0 items-center justify-between px-5 py-0.5 lg:hidden">
       <button
         type="button"
         aria-label="Volver a los detalles del vuelo"
-        className="grid size-11 cursor-pointer place-items-center rounded-full bg-rail-cold-bottom text-ink transition-transform duration-150 ease-soft active:scale-95"
+        className="toque-44 grid size-[34px] cursor-pointer place-items-center rounded-full bg-rail-cold-bottom text-ink transition-transform duration-150 ease-soft active:scale-95"
       >
-        <IconoChevron className="size-[18px]" />
+        <IconoChevron className="size-4" />
       </button>
 
       <Contador elegidos={elegidos} maximo={maximo} />
@@ -51,9 +51,9 @@ export function CabeceraMovil({ elegidos, maximo }: PropsCabecera) {
       <button
         type="button"
         aria-label="Preferencias de asiento"
-        className="grid size-11 cursor-pointer place-items-center rounded-full bg-rail-cold-bottom text-ink transition-transform duration-150 ease-soft active:scale-95"
+        className="toque-44 grid size-[34px] cursor-pointer place-items-center rounded-full bg-rail-cold-bottom text-ink transition-transform duration-150 ease-soft active:scale-95"
       >
-        <IconoAjustes className="size-[18px]" />
+        <IconoAjustes className="size-4" />
       </button>
     </header>
   );
@@ -69,7 +69,7 @@ export function CardRutaMovil({ vuelo }: { vuelo: Vuelo }) {
   return (
     <section
       aria-label={`Vuelo de ${vuelo.origen.ciudad} a ${vuelo.destino.ciudad}`}
-      className="mx-4 flex shrink-0 items-center gap-3 rounded-card bg-linear-to-r from-steel-from to-steel-to px-5 py-4 text-white lg:hidden"
+      className="mx-4 flex shrink-0 items-center gap-3 rounded-card bg-linear-to-r from-steel-from to-steel-to px-5 py-3 text-white lg:hidden"
     >
       <div>
         <p className="text-[34px] leading-[1.05] font-extrabold tracking-[-0.01em]">

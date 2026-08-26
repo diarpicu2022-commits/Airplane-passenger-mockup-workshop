@@ -113,6 +113,23 @@ body {
   left: calc(var(--seat-gap-x) / -2);
 }
 
+/* Controles redondos de cabecera: el mockup los dibuja a 34px. El círculo
+   visible se queda en 34px y el área activa se lleva a 44x44 con un
+   pseudo-elemento centrado. Aquí no hay vecinos, así que no solapa nada. */
+.toque-44 {
+  position: relative;
+}
+
+.toque-44::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
 /* ============================================================================
    SCROLL DEL MAPA (escritorio)
    El mockup dibuja una barra coral fina a la derecha del fuselaje.

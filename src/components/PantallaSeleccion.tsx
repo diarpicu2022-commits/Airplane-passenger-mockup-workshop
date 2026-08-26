@@ -101,7 +101,7 @@ export function PantallaSeleccion({ vuelo }: { vuelo: Vuelo }) {
         <CabeceraMovil elegidos={elegidos.length} maximo={vuelo.maxAsientos} />
         <CardRutaMovil vuelo={vuelo} />
 
-        <div className="shrink-0 px-5 pt-4 pb-1 lg:hidden">
+        <div className="shrink-0 px-5 pt-3 pb-1 lg:hidden">
           <Leyenda variante="movil" />
         </div>
 
