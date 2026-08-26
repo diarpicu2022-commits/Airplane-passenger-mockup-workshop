@@ -51,7 +51,7 @@ function FilaAsientos({ cabina, fila, seleccion, onToggle }: PropsFila) {
       ))}
 
       {/* Pasillo: el número de fila vive aquí, no en una columna aparte. */}
-      <div className="grid place-items-center text-[13px] text-muted lg:text-[15px]">
+      <div className="grid place-items-center text-[11px] text-muted lg:text-[13px]">
         {fila}
       </div>
 
@@ -87,7 +87,7 @@ export function MapaCabina({ vuelo, seleccion, onToggle }: Props) {
         <section key={cabina.id} aria-labelledby={`cabina-${cabina.id}`}>
           <h2
             id={`cabina-${cabina.id}`}
-            className="mt-10 mb-5 text-center text-[15px] font-bold text-ink-soft first:mt-0 lg:mt-12 lg:mb-6 lg:text-[17px]"
+            className="mt-7 mb-4 text-center text-[13px] font-bold text-ink-soft first:mt-0 lg:mt-7 lg:mb-5 lg:text-[14px]"
           >
             {cabina.nombre}
           </h2>

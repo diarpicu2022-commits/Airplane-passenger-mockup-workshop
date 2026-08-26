@@ -11,9 +11,9 @@ interface FilaProps {
 function FilaResumen({ etiqueta, valor, tono = "suave" }: FilaProps) {
   return (
     <div className="flex items-baseline justify-between gap-4">
-      <dt className="text-[16px] text-muted">{etiqueta}</dt>
+      <dt className="text-[14px] text-muted">{etiqueta}</dt>
       <dd
-        className={`text-[16px] font-bold tabular-nums ${
+        className={`text-[14px] font-bold tabular-nums ${
           tono === "fuerte" ? "text-ink" : "text-ink-soft"
         }`}
       >
@@ -53,10 +53,10 @@ export function RielSeleccion({
 
   return (
     <aside className="hidden h-full flex-col bg-linear-to-b from-rail-warm-top to-rail-warm-bottom px-8 pt-9 pb-8 lg:flex">
-      <h2 className="text-[19px] font-bold text-ink">Your selection</h2>
+      <h2 className="text-[17px] font-bold text-ink">Your selection</h2>
 
       {vacio ? (
-        <p className="mt-6 grid h-[90px] place-items-center rounded-[20px] border-2 border-dashed border-coral-dash px-4 text-center text-[16px] leading-[1.45] text-muted-warm">
+        <p className="mt-6 grid h-[90px] place-items-center rounded-[20px] border-2 border-dashed border-coral-dash px-4 text-center text-[14px] leading-[1.45] text-muted-warm">
           Pick up to {maximo} seats
           <br />
           from the cabin map
@@ -69,16 +69,16 @@ export function RielSeleccion({
               className="flex items-center justify-between gap-3 rounded-chip bg-white px-4 py-3"
             >
               <span className="min-w-0">
-                <span className="block text-[16px] font-bold text-ink tabular-nums">
+                <span className="block text-[14px] font-bold text-ink tabular-nums">
                   {asiento.codigo}
                 </span>
-                <span className="block truncate text-[13px] text-muted">
+                <span className="block truncate text-[12px] text-muted">
                   {nombreDeCabina(asiento)}
                 </span>
               </span>
 
               <span className="flex items-center gap-3">
-                <span className="text-[15px] font-bold text-ink tabular-nums">
+                <span className="text-[14px] font-bold text-ink tabular-nums">
                   {dolares(asiento.precio)}
                 </span>
                 <button
@@ -126,10 +126,10 @@ export function RielSeleccion({
       <hr className="my-7 border-0 border-t border-ink/10" />
 
       <div className="flex items-center justify-between gap-4">
-        <span className="text-[16px] text-muted">Total</span>
+        <span className="text-[14px] text-muted">Total</span>
         {/* Cifra de decisión: se lee para pagar, va en el tono más alto
             disponible (13.7:1 sobre el fondo durazno, AAA). */}
-        <span className="text-[40px] leading-none font-extrabold tracking-[-0.02em] text-ink tabular-nums">
+        <span className="text-[38px] leading-none font-extrabold tracking-[-0.02em] text-ink tabular-nums">
           {dolares(total)}
         </span>
       </div>

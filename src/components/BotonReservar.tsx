@@ -25,7 +25,7 @@ export function BotonReservar({ elegidos, className = "" }: Props) {
     <button
       type="button"
       disabled={!activo}
-      className={`h-14 w-full cursor-pointer rounded-full text-[17px] font-semibold transition-transform duration-150 ease-soft active:scale-[0.98] disabled:cursor-not-allowed disabled:active:scale-100 ${
+      className={`h-14 w-full cursor-pointer rounded-full text-[15px] font-semibold lg:text-[16px] transition-transform duration-150 ease-soft active:scale-[0.98] disabled:cursor-not-allowed disabled:active:scale-100 ${
         activo ? "bg-coral-deep text-white" : "bg-peach-100 text-cta-off-ink"
       } ${className}`}
     >

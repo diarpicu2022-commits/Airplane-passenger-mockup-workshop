@@ -21,7 +21,7 @@ export function Leyenda({ variante }: Props) {
 
   return (
     <ul
-      className={`flex items-center gap-x-4 text-[14px] text-muted lg:gap-x-6 lg:text-[15px] ${
+      className={`flex items-center gap-x-4 text-[13px] text-muted lg:gap-x-6 lg:text-[13px] ${
         esMovil ? "justify-start" : "justify-center"
       }`}
     >

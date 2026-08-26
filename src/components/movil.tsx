@@ -72,10 +72,10 @@ export function CardRutaMovil({ vuelo }: { vuelo: Vuelo }) {
       className="mx-4 flex shrink-0 items-center gap-3 rounded-card bg-linear-to-r from-steel-from to-steel-to px-5 py-4 text-white lg:hidden"
     >
       <div>
-        <p className="text-[26px] leading-[1.1] font-extrabold tracking-[-0.01em]">
+        <p className="text-[34px] leading-[1.05] font-extrabold tracking-[-0.01em]">
           {vuelo.origen.codigo}
         </p>
-        <p className="text-[13px] text-white/75">{vuelo.origen.ciudad}</p>
+        <p className="text-[14px] text-white/80">{vuelo.origen.ciudad}</p>
       </div>
 
       <div className="flex flex-1 items-center gap-2" aria-hidden="true">
@@ -85,10 +85,10 @@ export function CardRutaMovil({ vuelo }: { vuelo: Vuelo }) {
       </div>
 
       <div className="text-right">
-        <p className="text-[26px] leading-[1.1] font-extrabold tracking-[-0.01em]">
+        <p className="text-[34px] leading-[1.05] font-extrabold tracking-[-0.01em]">
           {vuelo.destino.codigo}
         </p>
-        <p className="text-[13px] text-white/75">{vuelo.destino.ciudad}</p>
+        <p className="text-[14px] text-white/80">{vuelo.destino.ciudad}</p>
       </div>
     </section>
   );
@@ -107,8 +107,8 @@ export function BarraTotalMovil({ total, elegidos }: PropsBarraTotal) {
   return (
     <div className="sticky bottom-0 z-10 flex items-center gap-4 border-t border-ink/5 bg-canvas/95 px-4 pt-3 pb-5 backdrop-blur-sm lg:hidden">
       <div className="shrink-0">
-        <p className="text-[13px] text-muted">Total</p>
-        <p className="text-[30px] leading-none font-extrabold tracking-[-0.02em] text-ink tabular-nums">
+        <p className="text-[12px] text-muted">Total</p>
+        <p className="text-[28px] leading-none font-extrabold tracking-[-0.02em] text-ink tabular-nums">
           {dolares(total)}
         </p>
       </div>

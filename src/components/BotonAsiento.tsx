@@ -36,7 +36,7 @@ export function BotonAsiento({ asiento, nombreCabina, seleccionado, onToggle }: 
       aria-pressed={ocupado ? undefined : seleccionado}
       aria-label={`Asiento ${asiento.codigo}, ${nombreCabina}, ${situacion}, ${dolares(asiento.precio)}`}
       onClick={() => onToggle(asiento)}
-      className={`asiento relative grid size-[var(--seat-size)] place-items-center rounded-seat text-[13px] font-medium transition-transform duration-150 ease-soft lg:text-[15px] ${estilo} ${
+      className={`asiento relative grid size-[var(--seat-size)] place-items-center rounded-seat text-[11px] font-medium transition-transform duration-150 ease-soft lg:text-[13px] ${estilo} ${
         ocupado ? "cursor-not-allowed" : "cursor-pointer active:scale-95"
       }`}
     >

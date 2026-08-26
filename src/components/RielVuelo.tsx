@@ -14,9 +14,9 @@ function tituloEnDosLineas(nombre: string) {
 function RanuraAsiento({ asiento }: { asiento?: Asiento }) {
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-[13px] text-muted">Seat</span>
+      <span className="text-[12px] text-muted">Seat</span>
       {asiento ? (
-        <span className="text-[15px] font-bold text-ink tabular-nums">{asiento.codigo}</span>
+        <span className="text-[14px] font-bold text-ink tabular-nums">{asiento.codigo}</span>
       ) : (
         /* Placeholder del mockup: un guion grueso, no un texto vacío. */
         <span className="h-1 w-6 rounded-[2px] bg-ink" aria-hidden="true" />
@@ -46,7 +46,7 @@ function ArcoRuta({ duracion }: { duracion: string }) {
       <IconoAvion className="absolute top-0 right-1 size-[18px] text-coral" />
 
       {/* La etiqueta se alinea a la derecha, a la altura de los puntos. */}
-      <span className="absolute right-0 bottom-0 text-[13px] text-muted tabular-nums">
+      <span className="absolute right-0 bottom-0 text-[12px] text-muted tabular-nums">
         {duracion}
       </span>
     </div>
@@ -55,11 +55,11 @@ function ArcoRuta({ duracion }: { duracion: string }) {
 
 function Chip({ etiqueta, valor }: { etiqueta: string; valor: string }) {
   return (
-    <div className="flex flex-1 flex-col gap-1.5 rounded-chip bg-white px-4 py-3">
-      <span className="text-[11px] font-medium tracking-[0.08em] text-muted uppercase">
+    <div className="flex flex-1 flex-col gap-1.5 rounded-chip bg-white px-3.5 py-3">
+      <span className="text-[10px] font-medium tracking-[0.08em] text-muted uppercase">
         {etiqueta}
       </span>
-      <span className="text-[16px] font-bold text-ink">{valor}</span>
+      <span className="text-[14px] font-bold whitespace-nowrap text-ink">{valor}</span>
     </div>
   );
 }
@@ -89,7 +89,7 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
         >
           <IconoChevron className="size-4" />
         </button>
-        <h1 className="text-[16px] font-semibold text-muted">Flight details</h1>
+        <h1 className="text-[13px] font-semibold text-muted">Flight details</h1>
       </div>
 
       {/* Card de tarifa */}
@@ -98,7 +98,7 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
           <span className="grid size-10 shrink-0 place-items-center rounded-[13px] bg-peach-50">
             <IconoCabina className="size-[13px] text-coral" />
           </span>
-          <p className="text-[15px] leading-[1.3] font-bold text-ink">
+          <p className="text-[16px] leading-[1.3] font-bold text-ink">
             {linea1}
             <br />
             {linea2}
@@ -110,7 +110,7 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
           <RanuraAsiento asiento={elegidos[1]} />
         </div>
 
-        <p className="mt-6 text-[15px] text-muted">
+        <p className="mt-6 text-[13px] text-muted">
           Price:{" "}
           <span className="font-bold text-coral-ink tabular-nums">{dolares(precioSeleccion)}</span>
         </p>
@@ -118,19 +118,19 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
 
       {/* Ruta. mt-auto/mb-auto centra el bloque en el espacio sobrante. */}
       <div className="my-auto py-6">
-        <p className="text-[56px] leading-[1] font-extrabold tracking-[-0.02em] text-ink">
+        <p className="text-[36px] leading-[1] font-extrabold tracking-[-0.02em] text-ink">
           {vuelo.origen.codigo}
         </p>
-        <p className="mt-1 text-[15px] text-muted">{vuelo.origen.ciudad}</p>
+        <p className="mt-1 text-[14px] text-muted">{vuelo.origen.ciudad}</p>
 
         <div className="my-6">
           <ArcoRuta duracion={vuelo.duracion} />
         </div>
 
-        <p className="text-[56px] leading-[1] font-extrabold tracking-[-0.02em] text-ink">
+        <p className="text-[36px] leading-[1] font-extrabold tracking-[-0.02em] text-ink">
           {vuelo.destino.codigo}
         </p>
-        <p className="mt-1 text-[15px] text-muted">{vuelo.destino.ciudad}</p>
+        <p className="mt-1 text-[14px] text-muted">{vuelo.destino.ciudad}</p>
       </div>
 
       <div className="flex gap-2.5">

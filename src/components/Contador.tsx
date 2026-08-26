@@ -16,7 +16,7 @@ export function Contador({ elegidos, maximo, conBarra = false }: Props) {
 
   return (
     <div className="flex items-center gap-5">
-      <p className="text-[15px] tabular-nums text-muted lg:text-[17px]">
+      <p className="text-[14px] tabular-nums text-muted">
         <span className="sr-only">Asientos elegidos: </span>
         {elegidos}/{maximo}
       </p>
