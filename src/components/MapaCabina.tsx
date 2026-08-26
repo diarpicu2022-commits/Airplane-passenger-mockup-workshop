@@ -84,10 +84,14 @@ export function MapaCabina({ vuelo, seleccion, onToggle }: Props) {
        exactamente un semicírculo sea cual sea el ancho. */
     <div className="mapa-cabina w-full rounded-t-[9999px] bg-linear-to-b from-arch to-canvas pt-14 pb-10 lg:w-[430px] lg:pt-[76px]">
       {vuelo.cabinas.map((cabina) => (
-        <section key={cabina.id} aria-labelledby={`cabina-${cabina.id}`}>
+        <section
+          key={cabina.id}
+          aria-labelledby={`cabina-${cabina.id}`}
+          className="mt-8 first:mt-0 lg:mt-7"
+        >
           <h2
             id={`cabina-${cabina.id}`}
-            className="mt-7 mb-4 text-center text-[13px] font-bold text-ink-soft first:mt-0 lg:mt-7 lg:mb-5 lg:text-[14px]"
+            className="mb-4 text-center text-[13px] leading-none font-bold text-ink-soft lg:mb-5 lg:text-[14px]"
           >
             {cabina.nombre}
           </h2>

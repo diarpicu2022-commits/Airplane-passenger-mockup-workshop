@@ -52,17 +52,17 @@ export function RielSeleccion({
   const vacio = elegidos.length === 0;
 
   return (
-    <aside className="hidden h-full flex-col bg-linear-to-b from-rail-warm-top to-rail-warm-bottom px-8 pt-9 pb-8 lg:flex">
+    <aside className="hidden h-full flex-col bg-linear-to-b from-rail-warm-top to-rail-warm-bottom px-8 pt-8 pb-8 lg:flex">
       <h2 className="text-[17px] font-bold text-ink">Your selection</h2>
 
       {vacio ? (
-        <p className="mt-6 grid h-[90px] place-items-center rounded-[20px] border-2 border-dashed border-coral-dash px-4 text-center text-[14px] leading-[1.45] text-muted-warm">
+        <p className="mt-5 grid h-[90px] place-items-center rounded-[20px] border-2 border-dashed border-coral-dash px-4 text-center text-[14px] leading-[1.45] text-muted-warm">
           Pick up to {maximo} seats
           <br />
           from the cabin map
         </p>
       ) : (
-        <ul className="mt-6 flex flex-col gap-2">
+        <ul className="mt-5 flex flex-col gap-2">
           {elegidos.map((asiento) => (
             <li
               key={asiento.id}

@@ -105,12 +105,12 @@ export function PantallaSeleccion({ vuelo }: { vuelo: Vuelo }) {
           <Leyenda variante="movil" />
         </div>
 
-        <div className="hidden shrink-0 flex-col items-center gap-6 pt-8 lg:flex">
+        <div className="hidden shrink-0 flex-col items-center gap-4 pt-6 lg:flex">
           <Contador elegidos={elegidos.length} maximo={vuelo.maxAsientos} conBarra />
           <Leyenda variante="escritorio" />
         </div>
 
-        <div className="scroll-cabina flex justify-center lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:pt-7">
+        <div className="scroll-cabina flex justify-center lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:pt-4">
           <MapaCabina vuelo={vuelo} seleccion={seleccion} onToggle={alternar} />
         </div>
 

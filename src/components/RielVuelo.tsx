@@ -93,7 +93,7 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
       </div>
 
       {/* Card de tarifa */}
-      <div className="mt-8 rounded-card bg-white p-5 shadow-[0_10px_30px_rgba(37,43,57,0.05)]">
+      <div className="mt-6 rounded-card bg-white p-5 shadow-[0_10px_30px_rgba(37,43,57,0.05)]">
         <div className="flex items-center gap-2">
           <span className="grid size-10 shrink-0 place-items-center rounded-[13px] bg-peach-50">
             <IconoCabina className="size-[13px] text-coral" />
@@ -116,8 +116,8 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
         </p>
       </div>
 
-      {/* Ruta. mt-auto/mb-auto centra el bloque en el espacio sobrante. */}
-      <div className="my-auto py-6">
+      {/* Ruta. El mockup la pega a la card y manda los chips al fondo. */}
+      <div className="mt-8">
         <p className="text-[36px] leading-[1] font-extrabold tracking-[-0.02em] text-ink">
           {vuelo.origen.codigo}
         </p>
@@ -133,7 +133,7 @@ export function RielVuelo({ vuelo, elegidos, cabinaMostrada, precioSeleccion }: 
         <p className="mt-1 text-[14px] text-muted">{vuelo.destino.ciudad}</p>
       </div>
 
-      <div className="flex gap-2.5">
+      <div className="mt-auto flex gap-2.5">
         <Chip etiqueta="Date" valor={vuelo.fecha} />
         <Chip etiqueta="Flight" valor={vuelo.numero} />
       </div>
