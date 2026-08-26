@@ -51,6 +51,15 @@
   --radius-chip: 16px;
   --radius-card: 24px;
 
+  /* --- Sombras coral -----------------------------------------------------
+     Añadido posterior a los mockups (que casi no llevan sombra). Todas
+     tintadas al acento, nunca negro puro, y muy difusas. */
+  --shadow-coral: 0 6px 18px -6px rgba(223, 119, 95, 0.55);
+  /* El asiento libre lleva su trazo como sombra interior (así la caja de
+     relleno no encoge) más el halo coral, en la misma declaración. */
+  --shadow-seat: inset 0 0 0 2px var(--color-coral-line), 0 3px 9px -3px rgba(223, 119, 95, 0.45);
+  --shadow-seat-on: 0 4px 12px -3px rgba(223, 119, 95, 0.7);
+
   /* --- Movimiento -------------------------------------------------------- */
   --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
