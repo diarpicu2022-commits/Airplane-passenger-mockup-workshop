@@ -82,7 +82,7 @@ export function MapaCabina({ vuelo, seleccion, onToggle }: Props) {
        rounded-t-[9999px] lo resuelve solo: el algoritmo de radios solapados
        de CSS reescala ambas esquinas hasta que suman el ancho, y deja
        exactamente un semicírculo sea cual sea el ancho. */
-    <div className="mapa-cabina w-full rounded-t-[9999px] bg-linear-to-b from-arch to-canvas pt-14 pb-10 lg:w-[430px] lg:pt-[76px]">
+    <div className="mapa-cabina w-full max-w-[430px] rounded-t-[9999px] bg-linear-to-b from-arch to-canvas pt-14 pb-10 lg:w-[430px] lg:pt-[76px]">
       {vuelo.cabinas.map((cabina) => (
         <section
           key={cabina.id}

@@ -97,12 +97,19 @@ export function PantallaSeleccion({ vuelo }: { vuelo: Vuelo }) {
       {/* COLUMNA CENTRAL — Flex vertical.
           En escritorio sólo scrollea el mapa; en móvil scrollea la página. */}
       <main className="flex min-h-dvh flex-col bg-canvas lg:h-full lg:min-h-0 lg:overflow-hidden">
-        <BarraDeEstadoSimulada />
-        <CabeceraMovil elegidos={elegidos.length} maximo={vuelo.maxAsientos} />
-        <CardRutaMovil vuelo={vuelo} />
+        {/* Los mockups sólo definen 390 y 1440. Entre medias (tablet), estirar
+            la maqueta de móvil a 768px deformaría el arco del fuselaje, que es
+            un semicírculo de radio = ancho/2. Se limita la columna al ancho de
+            teléfono y se centra: a 768 se ve una columna de móvil centrada,
+            no una pantalla de móvil deformada. */}
+        <div className="mx-auto w-full max-w-[430px] lg:hidden">
+          <BarraDeEstadoSimulada />
+          <CabeceraMovil elegidos={elegidos.length} maximo={vuelo.maxAsientos} />
+          <CardRutaMovil vuelo={vuelo} />
 
-        <div className="shrink-0 px-5 pt-3 pb-1 lg:hidden">
-          <Leyenda variante="movil" />
+          <div className="px-5 pt-3 pb-1">
+            <Leyenda variante="movil" />
+          </div>
         </div>
 
         <div className="hidden shrink-0 flex-col items-center gap-4 pt-6 lg:flex">

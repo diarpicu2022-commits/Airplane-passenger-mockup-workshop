@@ -17,7 +17,9 @@ export function BarraDeEstadoSimulada() {
       className="flex h-12 shrink-0 items-center justify-between px-6 lg:hidden"
       aria-hidden="true"
     >
-      <span className="text-[16px] font-medium text-ink tabular-nums">9:41</span>
+      <span className="text-[16px] font-medium text-ink tabular-nums">
+        9:41
+      </span>
 
       <span className="h-8 w-[118px] rounded-full bg-island" />
 
@@ -105,15 +107,17 @@ interface PropsBarraTotal {
  */
 export function BarraTotalMovil({ total, elegidos }: PropsBarraTotal) {
   return (
-    <div className="sticky bottom-0 z-10 flex items-center gap-4 border-t border-ink/5 bg-canvas/95 px-4 pt-3 pb-5 backdrop-blur-sm lg:hidden">
-      <div className="shrink-0">
-        <p className="text-[12px] text-muted">Total</p>
-        <p className="text-[28px] leading-none font-extrabold tracking-[-0.02em] text-ink tabular-nums">
-          {dolares(total)}
-        </p>
-      </div>
+    <div className="sticky bottom-0 z-10 border-t border-ink/5 bg-canvas/95 backdrop-blur-sm lg:hidden">
+      <div className="mx-auto flex w-full max-w-[430px] items-center gap-4 px-4 pt-3 pb-5">
+        <div className="shrink-0">
+          <p className="text-[12px] text-muted">Total</p>
+          <p className="text-[28px] leading-none font-extrabold tracking-[-0.02em] text-ink tabular-nums">
+            {dolares(total)}
+          </p>
+        </div>
 
-      <BotonReservar elegidos={elegidos} className="flex-1" />
+        <BotonReservar elegidos={elegidos} className="flex-1" />
+      </div>
     </div>
   );
 }
