@@ -232,8 +232,21 @@ Total 28 · CTA 15.
 Más el pill (`rounded-full`) para CTA y botones circulares. Ninguna otra.
 
 ### Sombras
-Casi inexistentes, como el mockup: `0 10px 30px rgba(37,43,57,0.05)` en la card
-del riel, tintada al azul del fondo y sin negro puro.
+Casi inexistentes en la primera versión, como el mockup: `0 10px 30px
+rgba(37,43,57,0.05)` en la card del riel, tintada al azul del fondo y sin negro
+puro.
+
+**Iteración posterior, a petición del usuario**: sombras coral, siempre
+tintadas al acento y muy difusas, nunca negro puro. Tres tokens en `@theme`
+(que en Tailwind v4 generan sus utilidades `shadow-*` automáticamente):
+
+- `--shadow-coral`: la de los chips del asiento elegido.
+- `--shadow-seat`: asiento libre — reúne el trazo interior de 2 px y el halo
+  coral en una sola declaración, así la geometría del área activa no cambia.
+- `--shadow-seat-on`: asiento elegido, halo algo más intenso.
+
+Es una desviación deliberada respecto al mockup (que va plano); queda anotada
+también en §9.
 
 ### Movimiento
 `--ease-soft: cubic-bezier(0.16, 1, 0.3, 1)`; 150 ms en pulsación, 200 ms en
@@ -311,17 +324,22 @@ así que quitar un asiento no vuelve a animar al que queda.
 
 ### El chip del asiento elegido
 
-Un solo componente, `ChipAsiento.tsx`, con dos variantes que **comparten color**
-(relleno `--color-coral`, texto `--color-ink`, 4,69:1) y sólo cambian de forma:
+Un solo componente, `ChipAsiento.tsx`, con dos variantes que comparten paleta y
+sólo cambian de forma:
 
-- **Móvil**, variante `ovalo`: píldora coral sobre el precio, en la barra
-  inferior, con el código y una **X integrada dentro del propio óvalo**.
+- **Móvil**, variante `ovalo`: píldora sobre el precio, en la barra inferior,
+  con el código y una **X integrada dentro del propio óvalo**.
 - **Escritorio**, variante `tarjeta`: rectángulo de esquinas suaves
   (`--radius-chip`, 16 px) en el riel derecho, con código, cabina, precio y X.
 
-Sustituye a la tarjeta blanca de la primera versión: el coral ata visualmente el
-chip con el asiento del mapa y con la muestra "Selected" de la leyenda, que es
-justo la relación que el usuario quería ver.
+**Tercera iteración, a petición del usuario** (las dos primeras fueron tarjeta
+blanca neutra y luego relleno coral macizo): fondo blanco con **trazo coral de
+2 px**, **sombra coral** (`--shadow-coral`), textos en negrita, y el código
+dentro de un **recuadro naranja con texto blanco**. El recuadro no usa el coral
+puro `#df775f` (con blanco da ≈3:1, falla AA) sino `--color-coral-deep`
+`#c2553a`, el mismo del CTA activo, que da 4,50:1. El recuadro naranja del
+código es ahora lo que ata el chip con el asiento elegido del mapa y con la
+muestra "Selected" de la leyenda.
 
 La X mide 24 px (móvil) y 28 px (escritorio) de círculo visible, con área activa
 llevada a **44 × 44** por `.toque-44`. Aquí sí cabe, porque los chips van
@@ -464,6 +482,9 @@ Servidor real (`npm run dev`) y Playwright 1.62.1 con Chromium, a
 12. **Ancho de Outfit**: a igual altura de mayúscula, Outfit sale ~10 % más ancha
     que la fuente del mockup en el display grande. Se prioriza igualar la altura
     visual; sobra sitio en el riel.
+13. **Sombras coral en asientos y chips** (§5-Sombras). El mockup va plano;
+    petición explícita del usuario en una iteración posterior, junto con el
+    rediseño del chip (§6 bis).
 
 ---
 

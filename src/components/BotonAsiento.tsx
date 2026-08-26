@@ -24,11 +24,12 @@ export function BotonAsiento({ asiento, nombreCabina, seleccionado, onToggle }: 
   const estilo = ocupado
     ? "bg-taken text-taken-ink"
     : seleccionado
-      ? "bg-coral text-ink"
+      ? "bg-coral text-ink shadow-seat-on"
       : // El contorno va como box-shadow interior y no como border: el border
         // encoge la caja de relleno y dejaba al asiento libre con MENOS área
-        // activa que al ocupado. Se ve idéntico, la geometría queda uniforme.
-        "bg-white text-coral-ink shadow-[inset_0_0_0_2px_var(--color-coral-line)]";
+        // activa que al ocupado. `--shadow-seat` reúne ese trazo y el halo
+        // coral en una sola declaración; la geometría queda uniforme.
+        "bg-white text-coral-ink shadow-seat";
 
   const situacion = ocupado ? "ocupado" : seleccionado ? "elegido" : "disponible";
 
