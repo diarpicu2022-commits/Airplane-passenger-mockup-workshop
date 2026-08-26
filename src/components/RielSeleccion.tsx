@@ -1,6 +1,7 @@
 import type { Asiento } from "@/lib/tipos";
 import { dolares } from "@/lib/cabina";
 import { BotonReservar } from "@/components/BotonReservar";
+import { ChipAsiento } from "@/components/ChipAsiento";
 
 interface FilaProps {
   etiqueta: string;
@@ -64,43 +65,13 @@ export function RielSeleccion({
       ) : (
         <ul className="mt-5 flex flex-col gap-2">
           {elegidos.map((asiento) => (
-            <li
+            <ChipAsiento
               key={asiento.id}
-              className="flex items-center justify-between gap-3 rounded-chip bg-white px-4 py-3"
-            >
-              <span className="min-w-0">
-                <span className="block text-[14px] font-bold text-ink tabular-nums">
-                  {asiento.codigo}
-                </span>
-                <span className="block truncate text-[12px] text-muted">
-                  {nombreDeCabina(asiento)}
-                </span>
-              </span>
-
-              <span className="flex items-center gap-3">
-                <span className="text-[14px] font-bold text-ink tabular-nums">
-                  {dolares(asiento.precio)}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => onQuitar(asiento)}
-                  aria-label={`Quitar el asiento ${asiento.codigo} de tu selección`}
-                  className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full text-muted transition-colors duration-150 hover:bg-peach-50 hover:text-coral-ink"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    className="size-4"
-                    aria-hidden="true"
-                  >
-                    <path d="M6 6l12 12M18 6L6 18" />
-                  </svg>
-                </button>
-              </span>
-            </li>
+              asiento={asiento}
+              nombreCabina={nombreDeCabina(asiento)}
+              variante="tarjeta"
+              onQuitar={onQuitar}
+            />
           ))}
         </ul>
       )}

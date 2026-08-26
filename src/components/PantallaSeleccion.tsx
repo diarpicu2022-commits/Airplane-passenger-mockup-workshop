@@ -121,7 +121,12 @@ export function PantallaSeleccion({ vuelo }: { vuelo: Vuelo }) {
           <MapaCabina vuelo={vuelo} seleccion={seleccion} onToggle={alternar} />
         </div>
 
-        <BarraTotalMovil total={total} elegidos={elegidos.length} />
+        <BarraTotalMovil
+          total={total}
+          elegidos={elegidos}
+          nombreDeCabina={cabinaDeAsiento}
+          onQuitar={alternar}
+        />
       </main>
 
       <RielSeleccion

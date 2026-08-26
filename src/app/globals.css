@@ -131,6 +131,27 @@ body {
 }
 
 /* ============================================================================
+   EL AVIÓN SOBRE LA RUTA
+   Estado base = final del trayecto. Es el que se ve cuando el sistema pide
+   movimiento reducido, y coincide con lo que dibuja el mockup: el avión
+   aparcado cerca del destino (escritorio) o en el centro de la línea (móvil).
+   La animación vive en el bloque no-preference del final del archivo.
+   ========================================================================= */
+.avion-arco {
+  /* Mismo trazo que pinta el <path> del SVG: el contenedor mide 240x56 css,
+     idéntico al viewBox, así que las coordenadas son intercambiables. */
+  offset-path: path("M 7 48 Q 107.5 -34.5 234 49");
+  offset-rotate: auto;
+  offset-anchor: center;
+  offset-distance: 100%;
+}
+
+.avion-pista {
+  --avion: 18px;
+  transform: translateX(calc(50% - var(--avion) / 2));
+}
+
+/* ============================================================================
    SCROLL DEL MAPA (escritorio)
    El mockup dibuja una barra coral fina a la derecha del fuselaje.
    ========================================================================= */
@@ -192,5 +213,82 @@ body {
 
   .esqueleto {
     animation: latido-esqueleto 1.4s ease-in-out infinite;
+  }
+
+  /* --- El avión recorre la ruta ------------------------------------------
+     Escritorio: sigue el mismo trazo punteado que dibuja el SVG, con
+     offset-rotate:auto para que se incline con la tangente de la curva.
+     El motor lo resuelve como una transformación, así que no hay layout.
+     El vuelo dura 7s y se detiene un momento en destino antes de repetir. */
+  @keyframes vuela-arco {
+    0% {
+      offset-distance: 0%;
+      opacity: 0;
+    }
+    6% {
+      opacity: 1;
+    }
+    72% {
+      offset-distance: 100%;
+      opacity: 1;
+    }
+    86% {
+      offset-distance: 100%;
+      opacity: 0;
+    }
+    100% {
+      offset-distance: 100%;
+      opacity: 0;
+    }
+  }
+
+  .avion-arco {
+    animation: vuela-arco 7s linear infinite;
+  }
+
+  /* Móvil: la ruta es recta, así que basta con recorrerla en X. El 100% es
+     el ancho de la propia pista, menos el avión para que no se salga. */
+  @keyframes vuela-recto {
+    0% {
+      transform: translateX(0);
+      opacity: 0;
+    }
+    6% {
+      opacity: 1;
+    }
+    72% {
+      transform: translateX(calc(100% - var(--avion, 18px)));
+      opacity: 1;
+    }
+    86% {
+      transform: translateX(calc(100% - var(--avion, 18px)));
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(calc(100% - var(--avion, 18px)));
+      opacity: 0;
+    }
+  }
+
+  .avion-pista {
+    animation: vuela-recto 7s linear infinite;
+  }
+
+  /* --- El asiento elegido aparece desde abajo ----------------------------
+     Sube a su sitio como si emergiera de la fila del mapa. Sólo transform y
+     opacity, 220ms, curva de salida suave. */
+  @keyframes entra-desde-abajo {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .entra-desde-abajo {
+    animation: entra-desde-abajo 220ms var(--ease-soft) both;
   }
 }

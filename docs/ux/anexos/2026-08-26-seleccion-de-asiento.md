@@ -264,6 +264,71 @@ breakpoints, sin cálculos.
 
 ---
 
+## 6 bis. Movimiento
+
+Añadido a petición del usuario después de la primera pasada. Los mockups son
+estáticos, así que todo lo de aquí es decisión propia y se somete al criterio de
+Kowalski: sólo `transform` y `opacity`, sin JS de animación, y todo desaparece
+bajo `prefers-reduced-motion`.
+
+**Regla de implementación**: las tres animaciones viven **dentro** del bloque
+`@media (prefers-reduced-motion: no-preference)`, no fuera con un override. Así
+el estado base es el estado quieto, y con movimiento reducido no queda ningún
+fotograma a medias. Es importante en el avión: si la animación se "acelerara a
+0,01 ms" en vez de no existir, terminaría en su último fotograma, que es
+`opacity: 0`, y el avión desaparecería.
+
+### El avión recorre la ruta
+
+| | Escritorio | Móvil |
+|---|---|---|
+| Trayecto | El mismo arco que dibuja el SVG | La línea punteada recta |
+| Técnica | `offset-path: path("M 7 48 Q 107.5 -34.5 234 49")` + `offset-rotate: auto` | `translateX(0 → calc(100% - 18px))` |
+| Estado quieto | `offset-distance: 100%` (aparcado en destino, como el mockup) | Centrado en la línea, como el mockup |
+
+En escritorio el contenedor mide **240 × 56 css exactos, idénticos al viewBox**,
+así que las coordenadas del `path()` de CSS y las del `<path>` del SVG son las
+mismas y el avión no puede desincronizarse del trazo. `offset-rotate: auto` lo
+inclina con la tangente: sube apuntando arriba y aterriza apuntando abajo.
+
+En móvil el truco es que el envoltorio del avión ocupa **el ancho completo de la
+pista**, de modo que su `translateX(100%)` equivale exactamente a cruzarla; se
+resta el ancho del icono para que no se salga por el borde.
+
+Ciclo de 7 s: 0-72 % vuela, 72-86 % se queda en destino, luego se desvanece y
+reaparece en origen. La pausa evita el efecto de bucle nervioso.
+
+Verificado en navegador: escritorio x = 52 → 94 → 138 → 180 → 220 → 234 con
+y = 20 → 8 (vértice) → 20 → 49; móvil x = 27 → 60 → 92 → 125 sobre 153 px de
+pista.
+
+### El asiento elegido aparece desde abajo
+
+`entra-desde-abajo`: `translateY(14px) scale(0.96)` + `opacity: 0` → posición
+final, 220 ms con `--ease-soft`. Sube a su sitio como si emergiera de la fila del
+mapa de la que sale. Sólo se anima al montar: React conserva el nodo por `key`,
+así que quitar un asiento no vuelve a animar al que queda.
+
+### El chip del asiento elegido
+
+Un solo componente, `ChipAsiento.tsx`, con dos variantes que **comparten color**
+(relleno `--color-coral`, texto `--color-ink`, 4,69:1) y sólo cambian de forma:
+
+- **Móvil**, variante `ovalo`: píldora coral sobre el precio, en la barra
+  inferior, con el código y una **X integrada dentro del propio óvalo**.
+- **Escritorio**, variante `tarjeta`: rectángulo de esquinas suaves
+  (`--radius-chip`, 16 px) en el riel derecho, con código, cabina, precio y X.
+
+Sustituye a la tarjeta blanca de la primera versión: el coral ata visualmente el
+chip con el asiento del mapa y con la muestra "Selected" de la leyenda, que es
+justo la relación que el usuario quería ver.
+
+La X mide 24 px (móvil) y 28 px (escritorio) de círculo visible, con área activa
+llevada a **44 × 44** por `.toque-44`. Aquí sí cabe, porque los chips van
+separados y no hay vecinos que pisar.
+
+---
+
 ## 7. Accesibilidad: hallazgos con sus mediciones
 
 Contraste medido en el navegador con Playwright sobre el color computado y el

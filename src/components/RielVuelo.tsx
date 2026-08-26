@@ -27,7 +27,13 @@ function RanuraAsiento({ asiento }: { asiento?: Asiento }) {
 
 function ArcoRuta({ duracion }: { duracion: string }) {
   return (
-    <div className="relative h-14 w-full" role="img" aria-label={`Duración del vuelo: ${duracion}`}>
+    /* 240x56 css fijos: el contenedor mide exactamente lo que el viewBox, de
+       modo que el avión puede recorrer el mismo trazo con offset-path. */
+    <div
+      className="relative h-14 w-60"
+      role="img"
+      aria-label={`Vuelo de ${duracion} entre origen y destino`}
+    >
       <svg viewBox="0 0 240 56" fill="none" className="h-full w-full" aria-hidden="true">
         {/* Trayecto punteado. Los guiones son largos y con punta redonda,
             como en el mockup. */}
@@ -42,8 +48,10 @@ function ArcoRuta({ duracion }: { duracion: string }) {
         <circle cx="234" cy="49" r="4.5" fill="var(--color-coral)" />
       </svg>
 
-      {/* El avión flota por encima del extremo derecho, separado del trazo. */}
-      <IconoAvion className="absolute top-0 right-1 size-[18px] text-coral" />
+      {/* El avión recorre la curva de origen a destino, inclinándose con la
+          tangente. Parado (movimiento reducido) descansa en el destino, que
+          es donde lo deja el mockup. */}
+      <IconoAvion className="avion-arco absolute top-0 left-0 size-[18px] text-coral" />
 
       {/* La etiqueta se alinea a la derecha, a la altura de los puntos. */}
       <span className="absolute right-0 bottom-0 text-[12px] text-muted tabular-nums">
