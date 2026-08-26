@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================================
+   TOKENS
+   Todos los valores salen de medir web.png y mobile.png con Pillow.
+   El hex del mockup va anotado cuando el token se desvía por contraste.
+   Ver docs/ux/anexos/2026-08-26-seleccion-de-asiento.md
+   ========================================================================= */
+@theme {
+  /* --- Color: texto ------------------------------------------------------ */
+  --color-ink: #252b39; /* medido: texto principal, MUC/LXR, totales */
+  --color-ink-soft: #3b4158; /* medido: títulos de cabina */
+  --color-muted: #686e80; /* mock #8c91a1 -> oscurecido. AA 4.66:1 sobre el
+                             riel frío, 4.70:1 sobre el degradado del fuselaje.
+                             Lo usan etiquetas y números de fila. */
+  --color-muted-warm: #776963; /* mock #aea39e -> oscurecido, AA 5.09:1 */
+
+  /* --- Color: acento coral ---------------------------------------------- */
+  --color-coral: #df775f; /* medido: relleno sólido, punto, avión, progreso */
+  --color-coral-ink: #b65b3f; /* mock #d48a75 -> oscurecido, AA 4.61:1 */
+  --color-coral-line: #eabaab; /* medido: borde del asiento disponible */
+  --color-coral-track: #ecd0c9; /* medido: barra de scroll del mapa */
+  --color-coral-deep: #c2553a; /* CTA activo con texto blanco, AA 4.50:1 */
+  --color-coral-dash: #edd7cf; /* medido: borde punteado del estado vacío */
+
+  /* --- Color: superficies ------------------------------------------------ */
+  --color-canvas: #fffdfd; /* medido: fondo de la columna central */
+  --color-rail-cold-top: #f8faff; /* medido: riel izquierdo, arriba */
+  --color-rail-cold-bottom: #eff3fa; /* medido: riel izquierdo, abajo */
+  --color-rail-warm-top: #ffffff; /* medido: riel derecho, arriba */
+  --color-rail-warm-bottom: #fef8f7; /* medido: riel derecho, abajo */
+  --color-peach-50: #fbefeb; /* medido: fondo del icono de cabina */
+  --color-peach-100: #eee4e0; /* medido: track de progreso y CTA off */
+  --color-cta-off-ink: #b1a9a5; /* medido: texto del CTA deshabilitado */
+  --color-arch: #f3f6fd; /* medido: tinte superior del fuselaje */
+
+  /* --- Color: asientos ocupados ----------------------------------------- */
+  --color-taken: #e5e7ee; /* medido: relleno */
+  --color-taken-ink: #9aa1b1; /* mock #b5bac5 -> leve ajuste, ver anexo */
+
+  /* --- Color: card de ruta (solo móvil) --------------------------------- */
+  --color-steel-from: #768db2; /* medido: extremo izquierdo del degradado */
+  --color-steel-to: #93a8c8; /* medido: extremo derecho */
+  --color-island: #1b1f2a; /* medido: Dynamic Island */
+
+  /* --- Tipografía -------------------------------------------------------- */
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Radios (escala cerrada: 3 valores, ver anexo) --------------------- */
+  --radius-seat: 10px;
+  --radius-chip: 16px;
+  --radius-card: 24px;
+
+  /* --- Movimiento -------------------------------------------------------- */
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================================
+   BASE
+   ========================================================================= */
+html {
+  /* El mapa de cabina es denso: no bloqueamos el zoom del navegador. */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Foco visible y consistente en TODO lo interactivo. El coral profundo se lee
+   sobre blanco, sobre durazno y sobre el relleno gris del asiento ocupado. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-coral-deep);
+  outline-offset: 2px;
+  border-radius: var(--radius-seat);
+}
+
+/* ============================================================================
+   GEOMETRÍA DEL MAPA DE CABINA
+   Un solo sitio define el tamaño de asiento, el pasillo y los gaps. Las
+   plantillas de grid en SeatRow los consumen como var(), así que la misma
+   clase de Tailwind sirve para móvil y escritorio.
+   Medidas: móvil 26px de asiento (mobile.png @2x), escritorio 34px (web.png @2x).
+   ========================================================================= */
+.mapa-cabina {
+  --seat-size: 26px;
+  --aisle-w: 30px;
+  --seat-gap-x: 6px;
+  --seat-gap-y: 8px;
+}
+
+@media (width >= 64rem) {
+  .mapa-cabina {
+    --seat-size: 34px;
+    --aisle-w: 38px;
+    --seat-gap-x: 8px;
+    --seat-gap-y: 9px;
+  }
+}
+
+/* El asiento mide 26px en móvil por fidelidad al mockup. Para no dejar el
+   objetivo táctil en 26px, un pseudo-elemento transparente extiende el área
+   activa hasta ocupar toda la celda de la rejilla (gap incluido) sin pisar al
+   vecino y sin tocar un solo píxel de lo que se ve. */
+.asiento::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--seat-gap-y) / -2);
+  right: calc(var(--seat-gap-x) / -2);
+  bottom: calc(var(--seat-gap-y) / -2);
+  left: calc(var(--seat-gap-x) / -2);
+}
+
+/* ============================================================================
+   SCROLL DEL MAPA (escritorio)
+   El mockup dibuja una barra coral fina a la derecha del fuselaje.
+   ========================================================================= */
+.scroll-cabina {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-coral-track) transparent;
+}
+
+.scroll-cabina::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-cabina::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-cabina::-webkit-scrollbar-thumb {
+  background: var(--color-coral-track);
+  border-radius: 999px;
+}
+
+/* ============================================================================
+   MOVIMIENTO REDUCIDO
+   Regla de Kowalski: sólo animamos transform y opacity, por debajo de 300ms, y
+   todo se cae a estático cuando el sistema lo pide.
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes aviso-entra {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .aviso-entra {
+    animation: aviso-entra 200ms var(--ease-soft) both;
+  }
+
+  @keyframes latido-esqueleto {
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  .esqueleto {
+    animation: latido-esqueleto 1.4s ease-in-out infinite;
+  }
 }
